@@ -1,0 +1,11 @@
+lib: [
+  "_build/install/default/lib/xkcdbot/META" {"META"}
+  "_build/install/default/lib/xkcdbot/opam" {"opam"}
+]
+bin: [
+  "_build/install/default/bin/xkcdbot" {"xkcdbot"}
+  "_build/install/default/bin/xkcdbot-crawler" {"xkcdbot-crawler"}
+]
+doc: [
+  "_build/install/default/doc/xkcdbot/README.md"
+]
