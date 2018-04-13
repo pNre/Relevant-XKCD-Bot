@@ -6,7 +6,7 @@ RUN opam install -y jbuilder lwt cohttp cohttp-lwt-unix tls
 RUN opam install -y yojson sqlite3 camlimages
 RUN mkdir /home/opam/xkcd
 WORKDIR /home/opam/xkcd
-RUN apk add git
+RUN sudo apk add git
 RUN git clone https://github.com/pNre/Relevant-XKCD-Bot.git .
 RUN eval `opam config env` && make
 
@@ -22,4 +22,4 @@ COPY --from=binary /home/opam/xkcd/bin/xkcdbot-crawler /app
 VOLUME ["/database"]
 RUN printf "#!/bin/sh\n/app/xkcdbot-crawler /database/comics > /var/log/crawler.log\n" > /etc/periodic/hourly/crawler
 RUN chmod +x /etc/periodic/hourly/crawler
-CMD ["sh" "-c", "crond && /app/xkcdbot /database/comics"]
+CMD ["sh", "-c", "crond && /app/xkcdbot /database/comics"]
