@@ -69,7 +69,7 @@ let decode_update body =
 
 (* Handles the inline query *)
 let handle_inline_query db (id, inline_query) =
-  Lwt.async (fun () -> Lwt_io.printf "Q: %s\n" inline_query);
+  Lwt.async (fun () -> Lwt_io.printf "%f: %s\n" (Unix.time ()) inline_query);
   catch
     (fun () ->
       search_matching_comic_for_inline_query db id inline_query
