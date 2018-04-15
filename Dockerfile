@@ -18,8 +18,8 @@ WORKDIR /app
 ENV PORT 8000
 EXPOSE 8000
 COPY --from=binary /home/opam/xkcd/bin/xkcdbot /app
-COPY --from=binary /home/opam/xkcd/bin/xkcdbot-crawler /app
+COPY --from=binary /home/opam/xkcd/bin/xkcdbot-indexer /app
 VOLUME ["/database"]
-RUN printf "#!/bin/sh\n/app/xkcdbot-crawler /database/comics > /var/log/crawler.log\n" > /etc/periodic/hourly/crawler
-RUN chmod +x /etc/periodic/hourly/crawler
-CMD ["sh", "-c", "crond && /app/xkcdbot /database/comics"]
+RUN printf "#!/bin/sh\n/app/xkcdbot-indexer /database/comics > /var/log/indexer.log\n" > /etc/periodic/hourly/indexer
+RUN chmod +x /etc/periodic/hourly/indexer
+CMD ["sh", "-c", "crond && /app/xkcdbot /database/comics xkcd"]

@@ -1,8 +1,8 @@
 (jbuild_version 1)
 
 (executables
- ((names (main crawler))
-  (public_names (xkcdbot xkcdbot-crawler))
+ ((names (indexer))
+  (public_names (xkcdbot-indexer))
   (libraries (lwt cohttp cohttp-lwt-unix yojson tls sqlite3 camlimages.core camlimages.jpeg camlimages.png))
-  (modules (main crawler))
+  (modules (indexer xkcd_indexer comics_indexer))
   (package xkcdbot)))

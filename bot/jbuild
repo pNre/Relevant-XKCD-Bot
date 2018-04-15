@@ -1,0 +1,8 @@
+(jbuild_version 1)
+
+(executables
+ ((names (main))
+  (public_names (xkcdbot))
+  (libraries (lwt cohttp cohttp-lwt-unix yojson tls sqlite3))
+  (modules (main comics_provider xkcd_provider))
+  (package xkcdbot)))
