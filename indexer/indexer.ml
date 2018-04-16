@@ -1,6 +1,5 @@
 open Comics_indexer
 open Xkcd_indexer
-open Lwt
 open Sqlite3
 
 let indexers = [
