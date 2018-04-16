@@ -16,15 +16,18 @@ module XkcdProvider: ComicsProvider = struct
       match step statement with
       | Rc.ROW ->
         let row = row_data statement in
-        let id = Data.to_string row.(0)
-        and title = Data.to_string row.(1)
+        let id = Data.to_string row.(0) in
+        let title = Data.to_string row.(1)
         and uri = Data.to_string row.(2)
+        and reference = Uri.make ~scheme:"https" ~host:"xkcd.com" ~path:id ()
         and (w, h) =
           try
-            (int_of_string(Data.to_string row.(3)), int_of_string(Data.to_string row.(4)))
+            let w = Data.to_string row.(3)
+            and h = Data.to_string row.(4) in
+            (int_of_string w, int_of_string h)
           with _ ->
             (0, 0) in
-        stepper ({id=id; uri=(Uri.of_string uri); title=title; width=w; height=h} :: results)
+        stepper ({id=id; uri=(Uri.of_string uri); title=title; width=w; height=h; reference=reference} :: results)
       | _ -> results in
     stepper []
 end

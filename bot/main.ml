@@ -9,8 +9,9 @@ open Sqlite3
 module Json = Yojson.Basic
 
 let map_inline_result result =
-  let uri = Uri.to_string result.Comics_provider.uri
-  and caption = Format.sprintf "%s (%s)" result.title result.Comics_provider.id in
+  let uri = Uri.to_string result.Comics_provider.uri 
+  and reference = Uri.to_string result.Comics_provider.reference in
+  let caption = Format.sprintf "[%s (%s)](%s)" result.title result.Comics_provider.id reference in
   `Assoc [
     ("type", `String "photo");
     ("id", `String result.Comics_provider.id);
@@ -18,7 +19,8 @@ let map_inline_result result =
     ("thumb_url", `String uri);
     ("caption", `String caption);
     ("photo_width", `Int result.Comics_provider.width);
-    ("photo_height", `Int result.Comics_provider.height)
+    ("photo_height", `Int result.Comics_provider.height);
+    ("parse_mode", `String "Markdown")
   ]
 
 (* Prepares the body to POST to "answerInlineQuery" *)

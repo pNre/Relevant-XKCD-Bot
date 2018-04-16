@@ -3,7 +3,8 @@ type comic = {
   uri: Uri.t;
   title: string;
   width: int;
-  height: int
+  height: int;
+  reference: Uri.t
 }
 
 module type ComicsProvider = sig
