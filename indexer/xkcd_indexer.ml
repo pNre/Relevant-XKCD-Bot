@@ -88,8 +88,7 @@ module XkcdIndexer: ComicsIndexer = struct
     | Rc.ROW ->
       let row = row_data statement in
       row.(0)
-      |> Data.to_string
-      |> int_of_string
+      |> Data.to_int_exn
     | _ -> 1
 
   let index_comics db progress_cb =

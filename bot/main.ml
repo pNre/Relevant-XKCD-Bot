@@ -65,7 +65,8 @@ let handle_inline_query provider db (id, inline_query) =
        cleanup_query inline_query
        >>= wrap1 (Provider.search_matching db)
        >>= inline_reply id)
-    (fun (_) ->
+    (fun (ex) ->
+       Lwt.async (fun () -> Lwt_io.printf "%f: %s\n" (Unix.time ()) (Printexc.to_string ex));
        inline_reply id [])
 
 (* Handles HTTP requests *)
